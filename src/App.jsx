@@ -1,4 +1,17 @@
+import React, { useState, useEffect } from 'react';
+
 function App() {
+  //Armazena dia da semana
+  const [dataFormatada, setDataFormatada] = useState('');
+
+  //Atualiza o dia da semana
+  useEffect(() => {
+    const dataAtual = new Date();
+    const opcoesDeFormato = { day: 'numeric', month: 'numeric', year: 'numeric' };
+
+    setDataFormatada(dataAtual.toLocaleDateString('pt-BR', opcoesDeFormato));
+
+  }, []);
 
   return (
     <main className="w-full px-10">
@@ -49,7 +62,7 @@ function App() {
               <buttom>
                 <img className="w-8 h-8 " src=".\src\assets\calender.png" alt="calendario" />
               </buttom>
-              09/12/2023
+              {dataFormatada}
             </span>
           </div>
           <table className=" mb-4 max-w-screen-xl mx-4 table-auto border-separate md:border-spacing-1 border border-slate-950">
