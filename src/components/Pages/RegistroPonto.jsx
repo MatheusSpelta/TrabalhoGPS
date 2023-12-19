@@ -1,7 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, Fragment } from 'react';
 import Header from '../Common/Header';
 import Sidebar from '../Common/Sidebar';
 import { determinarTurno, obterDiasDoMes } from '../../utils/dateUtils';
+import MyDialog from '../Common/Modal';
 
 
 function RegistroPonto() {
@@ -11,6 +12,21 @@ function RegistroPonto() {
   const [diasDoMes, setDiasDoMes] = useState(obterDiasDoMes());
   const [entrada, setEntrada] = useState(true);
   const [turnoAtual, setTurnoAtual] = useState('');
+  const [isDialogOpen, setIsDialogOpen] = useState(false);
+
+  const openDialog = () => {
+    setIsDialogOpen(true);
+  };
+
+  const closeDialog = () => {
+    setIsDialogOpen(false);
+
+  }
+
+  const closeDialogAndRefresh = () => {
+    setIsDialogOpen(false);
+    // Coloque aqui a lógica de atualização ou recarregamento desejada
+  };
 
   useEffect(() => {
     const atualizarDiaDaSemana = () => {
@@ -70,6 +86,8 @@ function RegistroPonto() {
     setEntrada(tipo === 'Entrada');
     setPrimeiraVezNoTurno(false);
   };
+
+
 
   return (
     <div className="w-full px-10">
@@ -208,9 +226,22 @@ function RegistroPonto() {
               Registrar Ponto
             </button>
 
-            <button className="bg-green-500 text-white font-bold py-2 px-4 rounded-lg">
+            <button
+              type="button"
+              className="bg-green-500 text-white font-bold py-2 px-4 rounded-lg"
+              onClick={openDialog} // Chama a função para abrir o modal
+            >
               Registro Manual
             </button>
+
+            {/* Renderiza o componente MyDialog com base no estado */}
+
+            {isDialogOpen && (
+              <MyDialog isOpen={isDialogOpen} onClose={() => closeDialogAndRefresh()} />
+            )}
+
+
+
           </div>
         </div>
       </div>
