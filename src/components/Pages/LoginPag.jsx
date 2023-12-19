@@ -1,5 +1,6 @@
 import { useState } from 'react';
-import 'D:/Gerenciar de Projeto/front-end/webPag/src/styles/stylesLoginPag.css';
+import 'D:/Gerenciar de Projeto/front-end/TrabalhoGPS/src/styles/stylesLoginPag.css';
+
 
 function LoginPag() {
 
